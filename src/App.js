@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { getUser } from "./Api/auth";
 import { Link, useNavigate } from "react-router-dom";
 import DashBoard from "./Components/DashBoard";
+import Buy from './Components/Buy'
 
 function App() {
   return (
@@ -52,6 +53,7 @@ const AppRoutes = () => {
         <Route exact path="/sign-up" element={<SignUp />}></Route>
         <Route exact path="/home" element={<Home />}></Route>
         <Route exact path="/dash-board" element={<DashBoard />}></Route>
+        <Route exact path="/buy" element={<Buy />}></Route>
       </Routes>
       <ToastContainer
         position="top-center"

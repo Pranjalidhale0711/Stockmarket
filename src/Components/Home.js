@@ -1,43 +1,22 @@
-import React, { useState, useEffect } from "react";
-import Header from "../Components/Header";
-import Lottie from "lottie-react";
-import home from "../Assets/home.json";
+import React, { useEffect, useState } from "react";
+import { IoMenu } from "react-icons/io5";
+import Sidebar from "../Utilis/sidebar";
+import { FaWindowClose } from "react-icons/fa";
+import Sidebar_responsive from "../Utilis/Sidebar_responsive";
 
 const HomePage = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [initialCredit, setinitialCredit] = useState(1000);
+ 
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const triggerOffset = window.innerHeight * 0.75; // Adjust as needed
-      setIsVisible(scrollTop > triggerOffset);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  if (localStorage.getItem("credits")==null) {
+    localStorage.setItem("credits", initialCredit);
+   
+  }
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <div className="flex min-h-screen min-w-screen items-center  justify-start ml-20">
-        <div className="flex flex-col w-1/2  ">
-          <div className="font-extrabold text-transparent sm:text-lg md:text-5xl bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">
-            Skill up and Practice on Our Platform with Zero Risk
-          </div>
-          <div className="font-bold  text-xl  text-[#52057B]">
-            New to trading? Hesitating to invest directly in stocks? Don't
-            worry, we are here to assist you. Practice investment risk-free.
-          </div>
-      
-        </div>
-        <div className="max-w-lg w-[50vw]">
-          <Lottie animationData={home} />
-        </div>
-      </div>
-    </div>
+    <>
+      <Sidebar_responsive />
+    </>
   );
 };
 
