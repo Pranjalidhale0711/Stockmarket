@@ -5,21 +5,37 @@ const portfolioSchema = new mongoose.Schema({
         type:Schema.ObjectId,
         ref:"User",
     },
+    balance:{
+        type:Number,
+    },
     portfolio:[{
         stockName:{
             type:String,
         },
-        stockBuyingPrice:{
-            type:String,
-        },
-        stockSellPrice:{
-            type:String
-        },
-        stockPurchaseDate:{
-            type:String
-        },
-        stockSellDate:{
-            type:String,
+        stockBuyingPrice:[{
+            stockBuyQuantity : {
+                type:Number
+            },
+            stockBuyPrice: {
+                type:Number
+            },
+            stockBuyDate : {
+                type:Number,
+            }
+        }],
+        stockSell:[{
+            stockSellQuantity : {
+                type:Number
+            },
+            stockSellPrice: {
+                type:Number
+            },
+            stockSellDate : {
+                type:Number,
+            }
+        }],
+        stockRemainigQuantity:{
+            type:Number
         }
     }]
     

@@ -1,5 +1,5 @@
 import express from 'express'
-import {Buy,Sell, findPortfolio} from '../controllers/trade_controllers.js'
+import {Sell,Buy, findPortfolio} from '../controllers/trade_controllers.js'
 import { checkAuthorization } from '../middleware/ValidateUser.js';
 
 const router=express.Router();
