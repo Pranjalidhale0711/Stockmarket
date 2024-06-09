@@ -9,7 +9,9 @@ function sidebar() {
     <Link to='/buy'>
       <div className="font-bold text-lg py-2 px-4 text-white hover:underline bg-[#7743DB]">Buy</div>
     </Link>
-    <div className="font-bold text-lg py-2 px-4 text-white  bg-[#7743DB] cursor-pointer hover:underline rounded-lg">Sell</div>
+    <Link to='/sell'>
+      <div className="font-bold text-lg py-2 px-4 text-white hover:underline bg-[#7743DB]">Sell</div>
+    </Link>
     <div className="font-bold text-lg py-2 px-4 text-white  bg-[#7743DB] cursor-pointer hover:underline rounded-lg">News</div>
     <div className="font-bold text-lg py-2 px-4 text-white  bg-[#7743DB] cursor-pointer hover:underline rounded-lg">Profile</div>
   </div>

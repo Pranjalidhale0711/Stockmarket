@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import Sidebar_responsive from "../Utilis/Sidebar_responsive";
-import { buyStock,getStock } from "../Api/auth";
+import { buyStock, getStock } from "../Api/auth";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
+
 
 function Buy() {
   const [stockName, setStockName] = useState("");
   const [stockInfo, setStockInfo] = useState(null);
+  const [stockQuantity, setStockQuantity] = useState(0);
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
@@ -19,10 +21,12 @@ function Buy() {
   };
   const handleBuyStock = async () => {
     try {
-      const res = buyStock(stockName,stockInfo.low);
+      const res =await buyStock(stockName,stockInfo.low,stockQuantity);
+      toast.success(res.message);
       console.log(res);
     } catch (e) {
-   
+      toast.error("Stock could not be Purchased");
+    console.log(e);
     }
   };
 
@@ -42,6 +46,11 @@ function Buy() {
           >
             Get Details
           </button>
+          <input
+            className="border-2 border-lightpurple bg-purple-100 p-2.5 rounded-md"
+            placeholder="Enter Quantity"
+            onChange={(e) => setStockQuantity(e.target.value)}
+          ></input>
         </div>
         <div className="flex justify-center items-center mt-4">
           {stockInfo && (

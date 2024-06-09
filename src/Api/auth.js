@@ -91,6 +91,32 @@ export const getStock = async (stockName) => {
   }
 };
 
-export const buyStock=()=>{
-  
+export const buyStock=async(stockName,stockInfo,stockQuantity)=>{
+  const token = localStorage.getItem("user");
+  console.log(token);
+  console.log(stockName);
+  console.log(stockInfo);
+  console.log(stockQuantity);
+  const response= await axios.post("http://localhost:3001/api/stock/buy",{
+    stockName:stockName,
+    stockBuyingPrice:stockInfo,
+    stockBuyQuantity:stockQuantity
+  },{ headers: { authorization: token ? `${token}` : " " } });
+  console.log(response.data.message);
+  return {message:response.data.message};
+}
+export const getStockData=async()=>{
+  try{
+   
+    const token = localStorage.getItem("user");
+    console.log(token);
+    const response= await axios.post("http://localhost:3001/api/stock/getstocks",{},{ headers: { authorization: token ? `${token}` : " " } });
+    const portfolio_user=response.data;
+    // console.log({portfolio_user});
+    return{portfolio_user:portfolio_user}
+  }catch(e)
+  {
+    console.log(e);
+  }
+ 
 }

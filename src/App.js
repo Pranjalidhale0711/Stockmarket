@@ -9,7 +9,10 @@ import { useEffect, useState } from "react";
 import { getUser } from "./Api/auth";
 import { Link, useNavigate } from "react-router-dom";
 import DashBoard from "./Components/DashBoard";
-import Buy from './Components/Buy'
+import Buy from './Components/Buy';
+import Sell from './Components/Sell';
+import Details from "./Components/Details";
+
 
 function App() {
   return (
@@ -54,6 +57,10 @@ const AppRoutes = () => {
         <Route exact path="/home" element={<Home />}></Route>
         <Route exact path="/dash-board" element={<DashBoard />}></Route>
         <Route exact path="/buy" element={<Buy />}></Route>
+        <Route exact path="/sell" element={<Sell />}></Route>
+        <Route exact path="/details/:stockName" element={<Details />}></Route>
+      
+
       </Routes>
       <ToastContainer
         position="top-center"
