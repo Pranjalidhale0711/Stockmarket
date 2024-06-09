@@ -20,7 +20,7 @@ const portfolioSchema = new mongoose.Schema({
                 type:Number
             },
             stockBuyDate : {
-                type:Number,
+                type:String,
             }
         }],
         stockSell:[{

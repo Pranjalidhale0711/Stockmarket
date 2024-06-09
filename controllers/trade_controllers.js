@@ -9,7 +9,7 @@ export const Buy = async (req, res) => {
   console.log(req.decoded_token);
   const userId = req.decoded_token.id;
   try {
-    const portfolio_user =await  Portfolio.findOne({userId:userId });
+    const portfolio_user = await Portfolio.findOne({ userId: userId });
     // console.log(portfolio_user);
     const dateObj = new Date();
     const year = dateObj.getFullYear();
@@ -22,33 +22,51 @@ export const Buy = async (req, res) => {
     const stock = portfolio_user.portfolio.find(
       (stock) => stock.stockName === stockName
     );
+    if (portfolio_user.balance - stockBuyQuantity * stockBuyingPrice >= 0)
+      portfolio_user.balance -= stockBuyQuantity * stockBuyingPrice;
+    else {
+      return res.status(500).json({ message: "You donot have enough balance" });
+    }
+
     if (stock == null) {
       console.log("i am here");
       portfolio_user.portfolio.push({
-        stockName:stockName,
-        stockBuyingPrice: [{ stockBuyQuantity:stockBuyQuantity, stockBuyPrice:stockBuyingPrice, currentDate:currentDate }],
+        stockName: stockName,
+        stockBuyingPrice: [
+          {
+            stockBuyQuantity: stockBuyQuantity,
+            stockBuyPrice: stockBuyingPrice,
+            stockBuyDate: currentDate,
+          },
+        ],
         stockSell: [],
         stockRemainigQuantity: stockBuyQuantity,
       });
-     
+
+      await portfolio_user.save();
+    } else {
+      console.log("hi inside else");
+      stock.stockBuyingPrice.push({
+        stockBuyQuantity: stockBuyQuantity,
+        stockBuyPrice: stockBuyingPrice,
+        stockBuyDate: currentDate,
+      });
+      // stockRemainigQuantity = parseFloat(stockRemainigQuantity);
+      // stockBuyQuantity = parseFloat(stockBuyQuantity);
+      stock.stockRemainigQuantity += Number(stockBuyQuantity);
       await portfolio_user.save();
     }
-    else{
-      console.log("hi inside else")
-      stock.stockBuyingPrice.push({stockBuyQuantity:stockBuyQuantity, stockBuyPrice:stockBuyingPrice, currentDate:currentDate });
-      stock.stockRemainigQuantity += stockBuyQuantity;
-      await portfolio_user.save();
-    }
-    return res.status(200).json({ message: "Portfolio created successfully", portfolio:portfolio_user });
-    
+    return res
+      .status(200)
+      .json({
+        message: "Portfolio created successfully",
+        portfolio: portfolio_user,
+      });
   } catch (error) {
     return res
       .status(404)
       .json({ message: "Portfolio not found for the given userId" });
-    
   }
-
-  
 
   // if (portfolio_user) {
 
@@ -76,10 +94,31 @@ export const findPortfolio = async (req, res) => {
   }
 };
 
-export const Sell = () => {
+export const Sell = async(req,res) => {
   
 };
 
+export const showStocks = async (req, res) => {
+  const user = User.find(req.decoded_token);
+  console.log(req.decoded_token);
+  const userId = req.decoded_token.id;
+  console.log(userId);
+  if (!userId) {
+    return;
+  }
+  try {
+    const portfolio_user = await Portfolio.findOne({ userId: userId });
+    console.log(portfolio_user);
+    res
+      .status(200)
+      .json({
+        message: "data fetched succesfully",
+        portfolio_user: portfolio_user,
+      });
+  } catch (e) {
+    res.status(500).json({ message: "error occured" });
+  }
+};
 // export const Buy = async (req, res) => {
 //   const stock_name = req.headers["stockname"];
 //   const dateObj = new Date();
