@@ -10,6 +10,8 @@ export const checkAuthorization = async (req, res, next) => {
   }
   const request_token = jwt.verify(token, process.env.JWTSECRET);
   req.decoded_token = request_token;
+  // console.log("jijijijijddd");
+  // console.log(token);
   if (!request_token) {
     res.status(403).send({ message: "Something went wrong" });
     return;

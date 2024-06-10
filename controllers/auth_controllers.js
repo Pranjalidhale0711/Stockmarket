@@ -8,16 +8,16 @@ import { checkAuthorization } from "../middleware/ValidateUser.js";
 import Portfolio from "../models/portfolio_model.js";
 
 export const signUp = async (req, res) => {
-  const { username, email, password, confirmPassword } = req.body;
-  const profile = await User.findOne({ username });
+  const { userName, email, password, confirmPassword } = req.body;
+  const profile = await User.findOne({ userName });
   if (profile) {
     res.status(500).json({ message: "user already exists" });
     return;
   }
 
   //checking mail already exsists
-  const checkformail = await User.findOne({ email });
-  if (checkformail) {
+  const checkForMail = await User.findOne({ email });
+  if (checkForMail) {
     res.status(500).json({ message: "mail is already registered" });
     return;
   }
@@ -45,7 +45,7 @@ export const signUp = async (req, res) => {
   const hashedPassword = await bcrypt
     .genSalt(10)
     .then((salt) => bcrypt.hash(newPassword, salt));
-  const user = new User({ username, email, password: hashedPassword });
+  const user = new User({ userName, email, password: hashedPassword });
   const portfolio = new Portfolio({ userId: user._id, balance: 1000, portfolio :[]});
   try {
     await portfolio.save();
@@ -60,21 +60,22 @@ export const signUp = async (req, res) => {
 };
 
 export const signIn = async (req, res) => {
-  const { username, password } = req.body;
-  const finduser = await User.findOne({ username });
-  if (!finduser) {
+  const { userName, password } = req.body;
+  console.log(userName)
+  const findUser = await User.findOne({ userName });
+  if (!findUser) {
     res.status(500).json({ message: "User does not exist" });
     return;
   }
 
   const newPassword = password + process.env.PEPPER;
-  const validatePassword = await bcrypt.compare(newPassword, finduser.password);
+  const validatePassword = await bcrypt.compare(newPassword, findUser.password);
   if (!validatePassword) {
     res.status(401).json({ message: "Inavalid Password, Please try again" });
     return;
   }
   try {
-    const id = finduser._id;
+    const id = findUser._id;
     const token = jwt.sign({ id }, process.env.JWTSECRET);
     // ValidateUser();
     // console.log(token);

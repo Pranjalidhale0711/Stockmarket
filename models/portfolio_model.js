@@ -31,7 +31,7 @@ const portfolioSchema = new mongoose.Schema({
                 type:Number
             },
             stockSellDate : {
-                type:Number,
+                type:String,
             }
         }],
         stockRemainigQuantity:{
