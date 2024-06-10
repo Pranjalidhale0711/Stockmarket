@@ -6,11 +6,11 @@ import { handleSubmitSignIn } from "../Api/auth";
 import Lottie from "lottie-react"
 import Signin from "../Assets/Signin.json"
 function SignUp() {
-  const [username, setUsername] = useState({});
+  const [userName, setUsername] = useState({});
   const [password, setPassword] = useState({});
   const navigate = useNavigate();
   const handleSubmit = async () => {
-    const response = await handleSubmitSignIn(username, password);
+    const response = await handleSubmitSignIn(userName, password);
     console.log(response?.error);
     if (response?.error == null) {
       navigate("/home");

@@ -2,6 +2,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import {handleSell} from '../Api/auth'
 
 function Card({ stockName, stockQuantity }) {
   const navigate = useNavigate();
@@ -19,16 +20,27 @@ function Card({ stockName, stockQuantity }) {
     //  console.log()
   };
 
-  const handleConfirmSell = () => {
+  const handleConfirmSell = async() => {
      console.log(sellQuantity)
      if(sellQuantity>stockQuantity)
       {
          toast.error("Dont have enough Stocks to Sell")
       }
+      try{
+        const response= await handleSell(stockName,stockQuantity);
+        if (response?.error == null) {
+           toast.success("Portfolio Updated Successfully");
+        } else {
+          toast.error(response.error);
+        }
+      }catch(e)
+      {
+        toast.error("Something Error Occured");
+      }
    
   };
   return (
-    <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div className="max-w-sm p-6 sm:w-full bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
       <div>
         <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-black">
           StockName: {stockName}

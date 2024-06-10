@@ -5,17 +5,10 @@ import { FaWindowClose } from "react-icons/fa";
 import Sidebar_responsive from "../Utilis/Sidebar_responsive";
 
 const HomePage = () => {
-  const [initialCredit, setinitialCredit] = useState(1000);
- 
-
-  if (localStorage.getItem("credits")==null) {
-    localStorage.setItem("credits", initialCredit);
-   
-  }
 
   return (
     <>
-      <Sidebar_responsive />
+      {/* <Sidebar_responsive /> */}
     </>
   );
 };

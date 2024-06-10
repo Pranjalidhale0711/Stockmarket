@@ -18,10 +18,10 @@ export default function Sell() {
     func();
   }, []);
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Your Portfolio</h1>
+    <div className="container  mx-auto p-4">
+      <h1 className="text-4xl font-extrabold mb-4 ">Your Portfolio</h1>
       <div className="">
-        <p className="mb-2">Balance: {userStockInfo.balance}</p>
+        <p className="mb-2 text-2xl">Balance: {userStockInfo.balance}</p>
         {userStockInfo?.portfolio?.map((stock, index) => (
           <div key={index} className="mb-4">
             <Card

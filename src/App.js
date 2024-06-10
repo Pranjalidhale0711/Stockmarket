@@ -10,8 +10,10 @@ import { getUser } from "./Api/auth";
 import { Link, useNavigate } from "react-router-dom";
 import DashBoard from "./Components/DashBoard";
 import Buy from './Components/Buy';
-import Sell from './Components/Sell';
+import Sell from './Components/sell'
 import Details from "./Components/Details";
+import Layout from './Utilis/Layout'
+import Profile from "./Components/Profile";
 
 
 function App() {
@@ -54,11 +56,12 @@ const AppRoutes = () => {
       <Routes>
         <Route exact path="/sign-in" element={<SignIn />}></Route>
         <Route exact path="/sign-up" element={<SignUp />}></Route>
-        <Route exact path="/home" element={<Home />}></Route>
-        <Route exact path="/dash-board" element={<DashBoard />}></Route>
-        <Route exact path="/buy" element={<Buy />}></Route>
-        <Route exact path="/sell" element={<Sell />}></Route>
-        <Route exact path="/details/:stockName" element={<Details />}></Route>
+        <Route exact path="/home" element={<Layout><Home /></Layout>}></Route>
+        <Route exact path="/dash-board" element={<Layout><DashBoard /></Layout>}></Route>
+        <Route exact path="/buy" element={<Layout><Buy /></Layout>}></Route>
+        <Route exact path="/sell" element={<Layout><Sell /></Layout>}></Route>
+        <Route exact path="/details/:stockName" element={<Layout><Details /></Layout>}></Route>
+        <Route exact path="/profile" element={<Layout><Profile /></Layout>}></Route>
       
 
       </Routes>
