@@ -54,7 +54,7 @@ export const getUser = async () => {
 export const getStock = async (stockName) => {
   const stock_name = stockName;
   const dateObj = new Date();
-  dateObj.setDate(dateObj.getDate() - 2);
+  dateObj.setDate(dateObj.getDate() - 1);
 
   const year = dateObj.getFullYear();
   const month = (dateObj.getMonth() + 1).toString().padStart(2, "0");
@@ -64,14 +64,14 @@ export const getStock = async (stockName) => {
 
   const formattedDate = `${year}-${month}-${day}`;
   const dateObj2 = new Date();
-  dateObj2.setDate(dateObj2.getDate() - 3);
+  dateObj2.setDate(dateObj2.getDate() - 2);
   const year2 = dateObj2.getFullYear();
   const month2 = (dateObj2.getMonth() + 1).toString().padStart(2, "0"); // Months are zero-based
   const day2 = dateObj2.getDate().toString().padStart(2, "0");
 
   const formattedDate2 = `${year2}-${month2}-${day2}`;
 
-  let currentDate = `2024-06-07 14:30:00`;
+  let currentDate = `2024-06-11 14:30:00`;
   console.log(currentDate)
 
   try {
@@ -82,7 +82,7 @@ export const getStock = async (stockName) => {
     const realTimeData = response.data.filter(
       (item) => item.date == currentDate
     );
-    console.log("hiiii")
+    // console.log("hiiii")
     console.log(realTimeData);
     return { stockInfo: realTimeData };
   } catch (e) {
@@ -138,4 +138,16 @@ export const handleSell=async(stockName,stockQuantity)=>{
   }
  
 
+}
+export const getStockAnalysis=async(stockName)=>{
+    try{
+      console.log(stockName)
+     const response= await axios.get(`https://financialmodelingprep.com/api/v3/key-metrics/${stockName}?period=annual&apikey=ucpqV91anbJoHZCiFMI7R3aQIB1kCJpj`)
+     console.log("iside getstock analysis")
+    //  console.log(response.data);
+     return{response:response.data};
+    }catch(e)
+    {
+      return{response:null};
+    }
 }

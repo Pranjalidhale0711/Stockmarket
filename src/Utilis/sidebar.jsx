@@ -19,6 +19,9 @@ function sidebar() {
     <Link to='/profile' className="w-full">
       <div className="font-bold text-lg py-2 px-4 text-white hover:underline bg-[#7743DB]">Profile</div>
     </Link>
+    <Link to='/analysis' className="w-full">
+      <div className="font-bold text-lg py-2 px-4 text-white hover:underline bg-[#7743DB]">Analysis</div>
+    </Link>
   </div>
 </div>
 
