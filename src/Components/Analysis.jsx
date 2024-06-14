@@ -184,7 +184,7 @@ function Analysis() {
    
       <div className="flex justify-center items-center mt-4">
           {stockInfo && (
-            <div className="text-black flex flex-col bg-[#7743DB] gap-5 p-2 rounded-md w-full sm:w-48">
+            <div className="text-black flex flex-col gap-5 p-2 rounded-md w-full sm:w-48">
               <p className="text-lg font-bold">Open: {stockInfo.open}</p>
               <p className="text-lg font-bold">Close: {stockInfo.close}</p>
               <p className="text-lg font-bold">Low: {stockInfo.low}</p>
