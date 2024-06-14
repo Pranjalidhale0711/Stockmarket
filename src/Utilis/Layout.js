@@ -1,11 +1,12 @@
-// Layout.js
 import React from 'react';
-import Sidebar_responsive from '../Utilis/Sidebar_responsive';
+
+import Sidebar from './sidebar.jsx'; 
+import Sidebar_responsive from './Sidebar_responsive.jsx';
 
 const Layout = ({ children }) => {
   return (
     <div className="flex">
-      <Sidebar_responsive />
+      <Sidebar_responsive/>
       <div className="flex-grow">
         {children}
       </div>

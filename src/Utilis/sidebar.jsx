@@ -5,7 +5,7 @@ function sidebar() {
   
   return (
 <div className='flex min-h-screen bg-[#7743DB] sm:min-h-screen items-start'>
-  <div className='flex bg-[#7743DB] flex-col justify-center gap-9 w-full '>
+  <div className='flex bg-[#7743DB] flex-col justify-center gap-10 w-full '>
   <Link to='/home' className="w-full">
       <div className="font-bold text-lg py-2 px-4 text-white hover:underline bg-[#7743DB]">Home</div>
     </Link>
@@ -15,12 +15,15 @@ function sidebar() {
     <Link to='/sell' className="w-full">
       <div className="font-bold text-lg py-2 px-4 text-white hover:underline bg-[#7743DB]">Sell</div>
     </Link>
-    <div className="font-bold text-lg py-2 px-4 text-white  bg-[#7743DB] cursor-pointer hover:underline rounded-lg">News</div>
+
     <Link to='/profile' className="w-full">
       <div className="font-bold text-lg py-2 px-4 text-white hover:underline bg-[#7743DB]">Profile</div>
     </Link>
     <Link to='/analysis' className="w-full">
       <div className="font-bold text-lg py-2 px-4 text-white hover:underline bg-[#7743DB]">Analysis</div>
+    </Link>
+    <Link to='/news' className="w-full">
+      <div className="font-bold text-lg py-2 px-4 text-white hover:underline bg-[#7743DB]">News</div>
     </Link>
   </div>
 </div>

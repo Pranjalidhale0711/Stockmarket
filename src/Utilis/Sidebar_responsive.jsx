@@ -14,9 +14,9 @@ function Sidebar_responsive() {
       <div className="min-h-screen">
         <div className=''>
           {!showSidebar ? (
-            <IoMenu style={{ fontSize: '2.5em', color: '#7743DB' }} className='w-full h-10' onClick={handleMenuClick} />
+            <IoMenu style={{ fontSize: '4em', color: '#7743DB' }} className='w-17 h-17' onClick={handleMenuClick} />
           ) : (
-            <FaWindowClose  style={{ fontSize: '2.5em', color: '#7743DB' }} onClick={handleMenuClick} />
+            <FaWindowClose  style={{ fontSize: '4em', color: '#7743DB' }} className='w-17 h-17' onClick={handleMenuClick} />
           )}
           {showSidebar && <Sidebar />}
         </div>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { buyStock, getStock, getStockAnalysis } from "../Api/auth";
-import { Chart } from "react-google-charts";
+import { buyStock, getMonthlyData, getStock, getStockAnalysis } from "../Api/auth";
 import { ChartDisplay } from "../Utilis/Chart";
 
 function Analysis() {
@@ -12,13 +11,21 @@ function Analysis() {
   const [dividendYield,setDividentYield]=useState([]);
   const [pbRatio,setPbRatio]=useState([]);
   const [chartData, setChartData] = useState(null);
+//   const [chartoptions,setChartOptions] = useState({}
+//     "chartoptions1":[],
+//     chartoptions2 : [],
+// })
   const [chartOptions, setChartOptions] = useState(null);
   const [chartData2, setChartData2] = useState(null);
+  const [date,setDate]=useState([]);
+  const [low,setLow]=useState([]);
   const [chartOptions2, setChartOptions2] = useState(null);
   const [chartData3, setChartData3] = useState(null);
   const [chartOptions3, setChartOptions3] = useState(null);
   const [chartData4, setChartData4] = useState(null);
   const [chartOptions4, setChartOptions4] = useState(null);
+  const [chartData5, setChartData5] = useState(null);
+  const [chartOptions5, setChartOptions5] = useState(null);
   const handleSubmit = async () => {
     try {
       const response = await getStock(stockName);
@@ -28,7 +35,7 @@ function Analysis() {
     }
    
     try {
-        setChartData(null);
+    setChartData(null);
     setChartOptions(null);
     setChartData2(null);
     setChartOptions2(null);
@@ -41,10 +48,7 @@ function Analysis() {
     dividendYield.length=0;
     peRatio.length=0;
     pbRatio.length=0;
-    // mktCap=[];
-    // dividendYield=[];
-    // peRatio=[];
-    // pbRatio=[];
+
      
         const response = await getStockAnalysis(stockName);
         // console.log(response.response);
@@ -73,6 +77,7 @@ function Analysis() {
           
           const options = {
             title: "PE Ratio Over Years",
+            backgroundColor:'#FFFBF5',
             hAxis: { title: "Year", titleTextStyle: { color: "#333" } },
             vAxis: { minValue: 0 },
             chartArea: { width: "50%", height: "70%" },
@@ -84,6 +89,7 @@ function Analysis() {
           
           const options2 = {
             title: "Market capital Over Years",
+            backgroundColor:'#FFFBF5',
             hAxis: { title: "Year", titleTextStyle: { color: "#333" } },
             vAxis: { minValue: 0 },
             chartArea: { width: "50%", height: "70%" },
@@ -96,6 +102,7 @@ function Analysis() {
           const options3 = {
             title: "Pb ratio Over Years",
             hAxis: { title: "Year", titleTextStyle: { color: "#333" } },
+            backgroundColor:'#FFFBF5',
             vAxis: { minValue: 0 },
             chartArea: { width: "50%", height: "70%" },
           };
@@ -108,6 +115,7 @@ function Analysis() {
             title: "Divident Yield ratio Over Years",
             hAxis: { title: "Year", titleTextStyle: { color: "#333" } },
             vAxis: { minValue: 0 },
+            backgroundColor:'#FFFBF5',
             chartArea: { width: "50%", height: "70%" },
           };
         setChartData(data);
@@ -122,13 +130,48 @@ function Analysis() {
       } catch (e) {
         console.log(e);
       }
+      try {
+        const res = await getMonthlyData(stockName);
+        // toast.success(res.message);
+        date.length=0;
+        low.length=0;
+        console.log("monthly response is ",res.startingEntries);
+        res.startingEntries.map((item)=>{
+          const temp=date;
+          temp.push(item.date);
+          setDate(temp);
+          const temp2=low;
+          temp2.push(Number(item.low));
+          console.log(item.low)
+          setLow(temp2);
+        })
+        const data = [
+          ["Date", "Price of stock"],
+          ...low.map((y, index) => [ date[index],y])
+        ];
+        
+        const options= {
+          title: "Price vs Date",
+          hAxis: { title: "Date", titleTextStyle: { color: "#333" } },
+          vAxis: { minValue: 0 },
+          backgroundColor:'#FFFBF5',
+          chartArea: { width: "50%", height: "70%" },
+        };
+        setChartData5(data);
+        setChartOptions5(options);
+        // console.log(res);
+      } catch (e) {
+        // toast.error("Error in showing Graph");
+        // console.log(e);
+      }
   };
 
 
   
   return (
-    <div className="flex justify-center my-6 flex-col items-center w-full">
-        <div>
+    <div className="flex justify-center  flex-col items-center w-full">
+       <h1 className="text-5xl mt-9 font-extrabold mb-4 text-[#52057B]">Get Analysis Of Stocks</h1>
+        <div className="my-4">
         <input
         className="border-2 border-lightpurple   bg-purple-100 p-2.5 rounded-md mb-2 sm:mb-0 sm:mr-2 w-full sm:w-48"
         placeholder="Enter Stock Name"
@@ -150,6 +193,11 @@ function Analysis() {
           )}
         </div>
         <div className="w-full">
+        <div className="w-full">
+        {date.length > 0 && (
+          <ChartDisplay data={chartData5} options={chartOptions5} />
+        )}
+      </div>
         {year.length > 0 && (
           <ChartDisplay data={chartData} options={chartOptions} />
         )}

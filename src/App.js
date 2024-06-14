@@ -15,6 +15,7 @@ import Details from "./Components/Details";
 import Layout from './Utilis/Layout'
 import Profile from "./Components/Profile";
 import Analysis from "./Components/Analysis";
+import ArticleList from "./Components/News";
 
 
 function App() {
@@ -64,6 +65,7 @@ const AppRoutes = () => {
         <Route exact path="/details/:stockName" element={<Layout><Details /></Layout>}></Route>
         <Route exact path="/profile" element={<Layout><Profile /></Layout>}></Route>
         <Route exact path="/analysis" element={<Layout><Analysis /></Layout>}></Route>
+        <Route exact path="/news" element={<Layout>< ArticleList/></Layout>}></Route>
       
 
       </Routes>

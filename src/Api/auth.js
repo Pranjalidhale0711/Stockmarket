@@ -1,5 +1,6 @@
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
+import { useState } from "react";
 
 export const handleSubmitSignIn = async (userName, password) => {
   try {
@@ -71,7 +72,7 @@ export const getStock = async (stockName) => {
 
   const formattedDate2 = `${year2}-${month2}-${day2}`;
 
-  let currentDate = `2024-06-11 14:30:00`;
+  let currentDate = `${formattedDate} 14:30:00`;
   console.log(currentDate)
 
   try {
@@ -83,13 +84,32 @@ export const getStock = async (stockName) => {
       (item) => item.date == currentDate
     );
     // console.log("hiiii")
-    console.log(realTimeData);
+    // console.log(realTimeData);
     return { stockInfo: realTimeData };
   } catch (e) {
     // console.log("Stock market is down at this moment");
     return { stockInfo: e };
   }
 };
+export const getMonthlyData=async(stockName)=>{
+ 
+  try {
+    const response = await axios.get(
+      `https://financialmodelingprep.com/api/v3/historical-chart/1month/AAPL?&apikey=ucpqV91anbJoHZCiFMI7R3aQIB1kCJpj`
+    );
+    const startingEntries = response.data.slice(0, 50);
+    // console.log("monthly response is ",startingEntries);
+    return{startingEntries:startingEntries}
+     
+    // console.log("hiiii")
+    // console.log(realTimeData);
+    // return { stockInfo: realTimeData };
+  } catch (e) {
+    return {startingEntries:"Stock market is down at this moment"};
+    // return { stockInfo: e };
+  }
+
+}
 
 export const buyStock=async(stockName,stockInfo,stockQuantity)=>{
   const token = localStorage.getItem("user");
@@ -109,7 +129,7 @@ export const getStockData=async()=>{
   try{
    
     const token = localStorage.getItem("user");
-    console.log(token);
+    // console.log(token);
     const response= await axios.post("http://localhost:3001/api/stock/getstocks",{},{ headers: { authorization: token ? `${token}` : " " } });
     const portfolio_user=response.data;
     // console.log({portfolio_user});
@@ -150,4 +170,26 @@ export const getStockAnalysis=async(stockName)=>{
     {
       return{response:null};
     }
+}
+export const getUserDetails=async()=>{
+  try{
+    const token = localStorage.getItem("user");
+    const response=await axios.post("http://localhost:3001/api/auth/getUserDetails",{},{ headers: { authorization: token ? `${token}` : " " } });
+    // console.log(response.data.user);
+    return{response:response.data.user}
+  }catch(e)
+  {
+    return {response:null};
+  }
+}
+export const updateProfile=async(updateUserName)=>{
+  try{
+    const token = localStorage.getItem("user");
+    const response=await axios.post("http://localhost:3001/api/auth/updateUser",{updateUserName:updateUserName},{ headers: { authorization: token ? `${token}` : " " } });
+    console.log(response);
+    return{response:response.data.user}
+  }catch(e)
+  {
+    return {response:null};
+  }
 }
