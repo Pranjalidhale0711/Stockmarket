@@ -8,4 +8,5 @@ router.post("/findPortfolio",checkAuthorization,findPortfolio);
 router.post("/sell",checkAuthorization,Sell);
 router.post("/getstocks",checkAuthorization,showStocks);
 
+
 export default router;

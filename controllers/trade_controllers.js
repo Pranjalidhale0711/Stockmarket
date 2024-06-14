@@ -89,8 +89,8 @@ export const Sell = async(req,res) => {
   const {stockName,stockQuantity,token1}=req.body;
   const stock_name = stockName;
   const dateObj = new Date();
-  dateObj.setDate(dateObj.getDate() - 2);
-
+  dateObj.setDate(dateObj.getDate() - 1);
+  console.log("sell")
   const year = dateObj.getFullYear();
   const month = (dateObj.getMonth() + 1).toString().padStart(2, "0");
   const day = dateObj.getDate().toString().padStart(2, "0");
@@ -99,15 +99,16 @@ export const Sell = async(req,res) => {
 
   const formattedDate = `${year}-${month}-${day}`;
   const dateObj2 = new Date();
-  dateObj2.setDate(dateObj2.getDate() - 3);
+  dateObj2.setDate(dateObj2.getDate() - 2);
   const year2 = dateObj2.getFullYear();
   const month2 = (dateObj2.getMonth() + 1).toString().padStart(2, "0"); // Months are zero-based
   const day2 = dateObj2.getDate().toString().padStart(2, "0");
 
   const formattedDate2 = `${year2}-${month2}-${day2}`;
 
-  let currentDate = `2024-06-07 14:30:00`;
-  console.log(currentDate)
+  let currentDate = `2024-06-11 14:30:00`;
+  
+  console.log("sell",currentDate)
   console.log(formattedDate2);
   console.log(formattedDate);
   console.log(stockName);
@@ -115,7 +116,7 @@ export const Sell = async(req,res) => {
 
   try {
     const response = await axios.get(
-      `https://financialmodelingprep.com/api/v3/historical-chart/1min/${stockName}?from=${formattedDate2}&to=${formattedDate}&apikey=ucpqV91anbJoHZCiFMI7R3aQIB1kCJpj`
+      `https://financialmodelingprep.com/api/v3/historical-chart/1min/${stock_name}?from=${formattedDate2}&to=${formattedDate}&apikey=ucpqV91anbJoHZCiFMI7R3aQIB1kCJpj`
     );
     // console.log(response.data);
     const realTimeData = response.data.filter(
@@ -123,7 +124,7 @@ export const Sell = async(req,res) => {
     );
     console.log("hiiii");
     // console.log("response is",realTimeData);
-    console.log(realTimeData[0].low);
+    // console.log(realTimeData[0].low);
     
     // console.log("token is ",token1);
     const response2 = await axios.post(  "http://localhost:3001/api/stock/getstocks",
@@ -138,7 +139,7 @@ export const Sell = async(req,res) => {
       .map(filteredStock => filteredStock.stockRemainigQuantity);
 
     // Log the result
-    console.log(stockRemainingQuantities);
+    // console.log(stockRemainingQuantities);
     if(stockQuantity>stockRemainingQuantities)
       {
         res.status(500).json({message:"You do not have enough stocks to sell"});
@@ -154,9 +155,12 @@ export const Sell = async(req,res) => {
         (stock) => stock.stockName === stockName
       );
       console.log("i am there");
-      console.log(stock)
+      console.log("stockrem",stockRemainingQuantities);
+      console.log("stockquqnatit",stockQuantity);
       stock.stockRemainigQuantity=totalRemainingStocks;
       portfolio_user.balance=totalFinalBalance;
+      console.log("ended reacged");
+      console.log("stockrem",stockRemainingQuantities);
       stock.stockSell.push({
         stockSellQuantity: stockQuantity,
         stockSellPrice: realTimeData[0].low,

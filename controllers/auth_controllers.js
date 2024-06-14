@@ -90,3 +90,30 @@ export const fetchUser = (req, res) => {
   // res.status(200).json({msg:"Check cnsole"});
   res.status(200).json({ message: req.decoded_token });
 };
+
+export const getUserDetails=async(req,res)=>{
+  console.log(req.decoded_token);
+  try{
+    const user= await User.findById(req.decoded_token.id);
+    console.log(user);
+    res.status(200).json({user:user});
+  }catch(e)
+  {
+    res.status(500).json({user:"No user found"});
+  }
+ 
+
+}
+export const updateUsername=async(req,res)=>{
+  const {updateUserName}=req.body;
+  try{
+    const user= await User.findById(req.decoded_token.id);
+    user.userName=updateUserName;
+    await user.save();
+    res.status(200).json({message:"Updated successfully"});
+  }catch(e)
+  {
+    res.status(500).json({message:"No user found"});
+  }
+ 
+}
