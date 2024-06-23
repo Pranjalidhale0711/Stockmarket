@@ -106,7 +106,7 @@ export const Sell = async(req,res) => {
 
   const formattedDate2 = `${year2}-${month2}-${day2}`;
 
-  let currentDate = `2024-06-11 14:30:00`;
+  let currentDate = `2024-06-14 14:30:00`;
   
   console.log("sell",currentDate)
   console.log(formattedDate2);
@@ -126,7 +126,7 @@ export const Sell = async(req,res) => {
     // console.log("response is",realTimeData);
     // console.log(realTimeData[0].low);
     
-    // console.log("token is ",token1);
+    console.log("token is ",token1);
     const response2 = await axios.post(  "http://localhost:3001/api/stock/getstocks",
       {},
       { headers: { authorization: token1 ? `${token1}` : " " } }
@@ -135,9 +135,12 @@ export const Sell = async(req,res) => {
 
     // Filter and map to get the stockRemainigQuantity for the specified stockName
     const stockRemainingQuantities = portfolio
-      .filter(stock => stock.stockName === stockName)
-      .map(filteredStock => filteredStock.stockRemainigQuantity);
-
+    .filter(stock => stock.stockName === stockName)
+    .map(filteredStock => filteredStock.stockRemainigQuantity);
+    
+    const userId = req.decoded_token.id;
+      console.log("userid is",userId);
+      console.log("balacne is" ,response2.data.portfolio_user.balance);
     // Log the result
     // console.log(stockRemainingQuantities);
     if(stockQuantity>stockRemainingQuantities)
@@ -145,11 +148,9 @@ export const Sell = async(req,res) => {
         res.status(500).json({message:"You do not have enough stocks to sell"});
         return;
       }
-
-      console.log(response2.data.portfolio_user.balance);
+      console.log(stockQuantity);
       const totalFinalBalance=response2.data.portfolio_user.balance+realTimeData[0].low*stockQuantity;
       const totalRemainingStocks=stockRemainingQuantities-stockQuantity;
-      const userId = req.decoded_token.id;
       const portfolio_user = await Portfolio.findOne({ userId: userId });
       const stock = portfolio_user.portfolio.find(
         (stock) => stock.stockName === stockName
@@ -192,7 +193,7 @@ export const showStocks = async (req, res) => {
   }
   try {
     const portfolio_user = await Portfolio.findOne({ userId: userId });
-    // console.log(portfolio_user);
+    console.log("user is ",portfolio_user);
     res
       .status(200)
       .json({
