@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import NewsList from './NewsList';
+import Pagination from './Pagination';
 
 const ArticleList = () => {
   const [articles, setArticles] = useState([]);
+  const [currentPage,setCurrentPage]=useState(1);
+  const [postPerPage,setPostPerPage]=useState(3);
 
   useEffect(() => {
     axios.get('https://newsapi.org/v2/everything?q=finance&from=2024-06-13&sortBy=publishedAt&apiKey=e255d757ed5a44e7a64b2e646abe5fca')
@@ -13,25 +17,21 @@ const ArticleList = () => {
         console.error('Error fetching data:', error);
       });
   }, []);
-
+  const lastPostIndex=currentPage*postPerPage;
+  const firstPostIndex=lastPostIndex-postPerPage;
+  const currentPosts=articles.slice(firstPostIndex,lastPostIndex);
   return (
     <div className="container mx-auto mt-8">
       <h1 className="text-5xl flex items-center text-[#52057B] justify-center font-bold mb-4">Latest Articles</h1>
-      <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {articles.map((article, index) => (
-          <div key={index} className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-xl font-bold mb-2">{article.title}</h2>
-            <p className="text-gray-700 mb-4">{article.description}</p>
-            <a
-              href={article.url}
-              className="text-blue-500 hover:underline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Read more
-            </a>
-          </div>
-        ))}
+      <div className="flex-col">
+       
+        <NewsList  articles={currentPosts} />
+        <Pagination
+                totalPosts={articles.length<40?articles.length:40}
+                postsPerPage={postPerPage}
+                setCurrentPage={setCurrentPage}
+                currentPage={currentPage}
+            />
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getStockData, getUserDetails, updateProfile } from '../Api/auth'
+import { getStockData, getUserDetails, updateProfile } from '../Api/auth';
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Profile() {
@@ -7,97 +7,103 @@ export default function Profile() {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState(null);
   const [newUserName, setNewUserName] = useState('');
-  const [stockNames,setStockNames]=useState([]);
-  const [stockRemainingQuantity,setStockremainingQuantity]=useState([]);
-  const [balance,setBalance]=useState(null);
+  const [stockNames, setStockNames] = useState([]);
+  const [stockRemainingQuantity, setStockRemainingQuantity] = useState([]);
+  const [balance, setBalance] = useState(null);
 
-  useEffect(()=>{
-    const func=async()=>{
-      // console.log("hi");
-      try{
-        const res= await getUserDetails();
-        // console.log(res.response);
+  useEffect(() => {
+    const func = async () => {
+      try {
+        const res = await getUserDetails();
         setUserName(res.response.userName);
         setEmail(res.response.email);
-      }catch(e)
-      {
-        // console.log(e);
+      } catch (e) {
+        console.log(e);
       }
-      try{
-        const response=await getStockData()
-        // console.log(response.portfolio_user.portfolio_user.portfolio);
-        stockNames.length=0;
-        stockRemainingQuantity.length=0;
+      try {
+        const response = await getStockData();
         setBalance(response.portfolio_user.portfolio_user.balance);
-        response.portfolio_user.portfolio_user.portfolio.map((name)=>{
-          let temp = stockNames;
-          temp.push(name.stockName);
-          let temp2 = stockRemainingQuantity;
-          temp2.push(name.stockRemainigQuantity);
-          setStockNames(temp);
-          setStockremainingQuantity(temp2);
-          // console.log("name is ",temp);
-          
-         
-        })
-      }catch(e)
-      {
-
+        const tempStockNames = [];
+        const tempStockRemainingQuantity = [];
+        response.portfolio_user.portfolio_user.portfolio.forEach((name) => {
+          tempStockNames.push(name.stockName);
+          tempStockRemainingQuantity.push(name.stockRemainigQuantity);
+        });
+        setStockNames(tempStockNames);
+        setStockRemainingQuantity(tempStockRemainingQuantity);
+      } catch (e) {
+        console.log(e);
       }
-      }
+    };
     func();
-  
-  })
-  const handleUpdateUserName=async()=>{
-    try{
-      const res= await updateProfile(newUserName);
+  }, []);
+
+  const handleUpdateUserName = async () => {
+    try {
+      const res = await updateProfile(newUserName);
       console.log(res.response);
-     
-    }catch(e)
-    {
+    } catch (e) {
       console.log(e);
     }
-  }
-  const handleGetDetails=(stockName)=>{
-    navigate(`/details/${stockName}`);
-  }
-  return (
-    <div className="flex flex-col">
-      <div className="flex items-center justify-center">
-      <h1 className="text-5xl mt-9 font-extrabold mb-4 text-[#52057B]">Your Profile</h1>
+  };
 
+  const handleGetDetails = (stockName) => {
+    navigate(`/details/${stockName}`);
+  };
+
+  return (
+    <div className="flex flex-col  items-center  min-h-screen p-4 text-[#52057B]">
+      <h1 className="text-4xl mt-6 text-5xl font-extrabold mb-4">Your Profile</h1>
+      <div className="bg-white text-black p-6 rounded-lg shadow-lg w-full max-w-4xl">
+        <div className="text-3xl bg-white text-start font-bold mb-4" id="userName">
+          Username: {userName}
+        </div>
+        <div className="text-3xl bg-white text-start font-bold mb-4" id="email">
+          Gmail: {email}
+        </div>
+        <div className="flex bg-white flex-col ">
+          <input
+            type="text"
+            className="border p-2 bg-white rounded max-w-sm mb-4"
+            placeholder="Enter new username"
+            onChange={(e) => setNewUserName(e.target.value)}
+          />
+          <button
+            className="bg-blue-500 text-white p-2 rounded max-w-sm hover:bg-blue-700 mb-4"
+            onClick={handleUpdateUserName}
+          >
+            Update Username
+          </button>
+        </div>
+        <div className="text-2xl bg-white text-center font-bold mb-4">
+          Balance: {balance}
+        </div>
+        <table className="min-w-full bg-white text-black rounded-lg shadow-lg">
+          <thead>
+            <tr>
+              <th className="py-2 px-4 bg-white border-b text-center text-sm md:text-base">Stock Name</th>
+              <th className="py-2 px-4 bg-white border-b text-center text-sm md:text-base">Remaining Quantity</th>
+              <th className="py-2 px-4 bg-white border-b text-center text-sm md:text-base">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {stockNames.map((name, index) => (
+              <tr key={index}>
+                <td className="py-2 px-4 border-b text-center text-sm md:text-base">{name}</td>
+                <td className="py-2 px-4 border-b text-center text-sm md:text-base">{stockRemainingQuantity[index]}</td>
+                <td className="py-2 px-4 border-b text-center text-sm md:text-base">
+                  <button
+                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700"
+                    onClick={() => { handleGetDetails(name); }}
+                  >
+                    Get Details
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-        <div className="flex flex-col items-start text-black p-4 space-y-4">
-      
-      <div className="text-4xl text-gray-800 items-center justify-center font-bold" id="userName">Username:{userName}</div>
-      <div className="text-4xl text-gray-800 font-bold " id="email">Gmail:{email}</div>
-      <input type="text" className="border p-2  rounded"placeholder="Enter new username"onChange={(e) => setNewUserName(e.target.value)}/>
-      <button className="bg-blue-500 text-white p-2 rounded hover:bg-blue-700" onClick={handleUpdateUserName}>Update Username </button>
-      <div className="text-gray-800 text-3xl font-bold">Balance :{balance}</div>
-      <table className="min-w-full bg-white">
-      <thead>
-        <tr>
-          <th className="py-2 px-4 border-b text-right">Stock Name</th>
-          <th className="py-2 px-4 border-b text-right">Remaining Quantity</th>
-          <th className="py-2 px-4 border-b text-right">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {stockNames.map((name, index) => (
-          <tr key={index}>
-            <td className="py-2 px-4 border-b text-center">{name}</td>
-            <td className="py-2 px-4 border-b text-right">{stockRemainingQuantity[index]}</td>
-            <td className="py-2 px-4 border-b text-right">
-              <button className="bg-blue-500 text-white px-4 py-2 rounded ml-auto" onClick={()=>{handleGetDetails(name)}} >
-                Get Details
-              </button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
     </div>
-    </div>
-  
   );
 }

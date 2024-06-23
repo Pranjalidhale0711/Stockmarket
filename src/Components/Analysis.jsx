@@ -145,6 +145,8 @@ function Analysis() {
           console.log(item.low)
           setLow(temp2);
         })
+        date.reverse();
+        low.reverse();
         const data = [
           ["Date", "Price of stock"],
           ...low.map((y, index) => [ date[index],y])
@@ -157,6 +159,7 @@ function Analysis() {
           backgroundColor:'#FFFBF5',
           chartArea: { width: "50%", height: "70%" },
         };
+       
         setChartData5(data);
         setChartOptions5(options);
         // console.log(res);

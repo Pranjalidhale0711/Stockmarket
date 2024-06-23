@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 function sidebar() {
   
   return (
-<div className='flex min-h-screen bg-[#7743DB] sm:min-h-screen items-start'>
+<div className='flex min-h-[calc(100vh-17px)] bg-[#7743DB]  items-start'>
   <div className='flex bg-[#7743DB] flex-col justify-center gap-10 w-full '>
   <Link to='/home' className="w-full">
       <div className="font-bold text-lg py-2 px-4 text-white hover:underline bg-[#7743DB]">Home</div>

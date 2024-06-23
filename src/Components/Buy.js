@@ -37,6 +37,8 @@ function Buy() {
         console.log(item.low)
         setLow(temp2);
       })
+      date.reverse();
+      low.reverse();
       const data = [
         ["Date", "Price of stock"],
         ...low.map((y, index) => [ date[index],y])

@@ -44,6 +44,8 @@ function Card({ stockName, stockQuantity }) {
         console.log(item.low)
         setLow(temp2);
       })
+      date.reverse();
+      low.reverse();
       const data = [
         ["Date", "Price of stock"],
         ...low.map((y, index) => [ date[index],y])
@@ -73,7 +75,7 @@ function Card({ stockName, stockQuantity }) {
          toast.error("Dont have enough Stocks to Sell")
       }
       try{
-        const response= await handleSell(stockName,stockQuantity);
+        const response= await handleSell(stockName,sellQuantity);
         if (response?.error == null) {
            toast.success("Portfolio Updated Successfully");
         } else {
