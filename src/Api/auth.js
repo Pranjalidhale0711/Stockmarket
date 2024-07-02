@@ -1,6 +1,5 @@
-import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
-import { useState } from "react";
+
 
 export const handleSubmitSignIn = async (userName, password) => {
   try {
@@ -32,9 +31,10 @@ export const handleSubmitSignUp = async (
       password: password,
       confirmPassword: confirmPassword,
     });
+    // console.log(res);
     return { error: null };
   } catch (error) {
-    return { error: error?.response?.data?.message };
+    return { error: error?.res?.data?.message };
   }
 };
 
@@ -56,14 +56,10 @@ export const getStock = async (stockName) => {
   const stock_name = stockName;
   const dateObj = new Date();
   dateObj.setDate(dateObj.getDate() - 1);
-
   const year = dateObj.getFullYear();
   const month = (dateObj.getMonth() + 1).toString().padStart(2, "0");
   const day = dateObj.getDate().toString().padStart(2, "0");
-  let hours = dateObj.getHours().toString().padStart(2, "0");
-  let minutes = dateObj.getMinutes().toString().padStart(2, "0");
-
-  const formattedDate = `${year}-${month}-${day}`;
+const formattedDate = `${year}-${month}-${day}`;
   const dateObj2 = new Date();
   dateObj2.setDate(dateObj2.getDate() - 2);
   const year2 = dateObj2.getFullYear();
@@ -77,14 +73,14 @@ export const getStock = async (stockName) => {
 
   try {
     const response = await axios.get(
-      `https://financialmodelingprep.com/api/v3/historical-chart/1min/${stock_name}?from=${formattedDate2}&to=${formattedDate}&apikey=ucpqV91anbJoHZCiFMI7R3aQIB1kCJpj`
+      `https://financialmodelingprep.com/api/v3/historical-chart/1min/${stock_name}?from=${formattedDate2}&to=${formattedDate}&apikey=H1zferWKvAUxOfq8l950p97RLui7QkMG`
     );
     // console.log(response.data);
     const realTimeData = response.data.filter(
-      (item) => item.date == currentDate
+      (item) => item.date === currentDate
     );
-    // console.log("hiiii")
-    // console.log(realTimeData);
+    console.log("hiiii")
+    console.log(realTimeData);
     return { stockInfo: realTimeData };
   } catch (e) {
     // console.log("Stock market is down at this moment");
@@ -95,28 +91,18 @@ export const getMonthlyData=async(stockName)=>{
  
   try {
     const response = await axios.get(
-      `https://financialmodelingprep.com/api/v3/historical-chart/1month/AAPL?&apikey=ucpqV91anbJoHZCiFMI7R3aQIB1kCJpj`
+      `https://financialmodelingprep.com/api/v3/historical-chart/1month/${stockName}?&apikey=H1zferWKvAUxOfq8l950p97RLui7QkMG`
     );
     const startingEntries = response.data.slice(0, 50);
-    // console.log("monthly response is ",startingEntries);
     return{startingEntries:startingEntries}
-     
-    // console.log("hiiii")
-    // console.log(realTimeData);
-    // return { stockInfo: realTimeData };
   } catch (e) {
     return {startingEntries:"Stock market is down at this moment"};
-    // return { stockInfo: e };
   }
 
 }
 
 export const buyStock=async(stockName,stockInfo,stockQuantity)=>{
   const token = localStorage.getItem("user");
-  console.log(token);
-  console.log(stockName);
-  console.log(stockInfo);
-  console.log(stockQuantity);
   const response= await axios.post("http://localhost:3001/api/stock/buy",{
     stockName:stockName,
     stockBuyingPrice:stockInfo,
@@ -129,10 +115,8 @@ export const getStockData=async()=>{
   try{
    
     const token = localStorage.getItem("user");
-    // console.log(token);
     const response= await axios.post("http://localhost:3001/api/stock/getstocks",{},{ headers: { authorization: token ? `${token}` : " " } });
     const portfolio_user=response.data;
-    // console.log({portfolio_user});
     return{portfolio_user:portfolio_user}
   }catch(e)
   {
@@ -140,16 +124,18 @@ export const getStockData=async()=>{
   }
  
 }
-export const handleSell=async(stockName,stockQuantity)=>{
+export const handleSell=async(stockName,stockQuantity,stockPrice)=>{
   const token = localStorage.getItem("user");
+  // console.log("inide handle sell",stockPrice);
   try{
     const response= await axios.post("http://localhost:3001/api/stock/sell",{
       stockName:stockName,
       stockQuantity:stockQuantity,
-      token1:token
+      stockPrice:stockPrice
     },{
       headers: { authorization: token ? `${token}` : " " }
     })
+    // console.log(response);
     return { error: null };
    
   }catch(e)
@@ -161,9 +147,9 @@ export const handleSell=async(stockName,stockQuantity)=>{
 }
 export const getStockAnalysis=async(stockName)=>{
     try{
-      console.log(stockName)
-     const response= await axios.get(`https://financialmodelingprep.com/api/v3/key-metrics/${stockName}?period=annual&apikey=ucpqV91anbJoHZCiFMI7R3aQIB1kCJpj`)
-     console.log("iside getstock analysis")
+      // console.log(stockName)
+     const response= await axios.get(`https://financialmodelingprep.com/api/v3/key-metrics/${stockName}?period=annual&apikey=H1zferWKvAUxOfq8l950p97RLui7QkMG`)
+    //  console.log("iside getstock analysis")
     //  console.log(response.data);
      return{response:response.data};
     }catch(e)

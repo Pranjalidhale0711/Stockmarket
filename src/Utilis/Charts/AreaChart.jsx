@@ -1,11 +1,11 @@
 import { Chart } from "react-google-charts";
 
 
-export function Linechart({data,options}) {
+export function AreaChart({data,options}) {
     
-    console.log("hello i am insode chart");
-    console.log("data",data);
-    console.log("options",options);
+    // console.log("hello i am insode chart");
+    // console.log("data",data);
+    // console.log("options",options);
     return (
       <Chart
         chartType="AreaChart"

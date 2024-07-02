@@ -4,18 +4,19 @@ import SignIn from "./Components/SignIn";
 import SignUp from "./Components/SignUp";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
-import Home from "./Components/Home";
 import { useEffect, useState } from "react";
 import { getUser } from "./Api/auth";
-import { Link, useNavigate } from "react-router-dom";
-import DashBoard from "./Components/DashBoard";
-import Buy from './Components/Buy';
-import Sell from './Components/sell'
-import Details from "./Components/Details";
-import Layout from './Utilis/Layout'
-import Profile from "./Components/Profile";
-import Analysis from "./Components/Analysis";
+import { useNavigate } from "react-router-dom";
+import Buy from './Components/Buy/Buy';
+import Sell from './Components/Sell/Sell'
+
+import Profile from "./Components/Dashboard/Profile";
+import Analysis from "./Components/Analysis/Analysis";
 import ArticleList from "./Components/News";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.js";
+import HomePage from "./Components/HomePage/index";
+import SpecificStockAnalysis from "./Components/Analysis/SpecificStockAnalysis";
 
 
 function App() {
@@ -56,16 +57,16 @@ const AppRoutes = () => {
   return (
     <>
       <Routes>
+
         <Route exact path="/sign-in" element={<SignIn />}></Route>
         <Route exact path="/sign-up" element={<SignUp />}></Route>
-        <Route exact path="/home" element={<Layout><Home /></Layout>}></Route>
-        <Route exact path="/dash-board" element={<Layout><DashBoard /></Layout>}></Route>
-        <Route exact path="/buy" element={<Layout><Buy /></Layout>}></Route>
-        <Route exact path="/sell" element={<Layout><Sell /></Layout>}></Route>
-        <Route exact path="/details/:stockName" element={<Layout><Details /></Layout>}></Route>
-        <Route exact path="/profile" element={<Layout><Profile /></Layout>}></Route>
-        <Route exact path="/analysis" element={<Layout><Analysis /></Layout>}></Route>
-        <Route exact path="/news" element={<Layout>< ArticleList/></Layout>}></Route>
+        <Route exact path="/home" element={<HomePage />}></Route>
+        <Route exact path="/buy" element={<Buy />}></Route>
+        <Route exact path="/sell" element={<Sell />}></Route>
+     <Route exact path="/specificStockAnalysis/:stockName" element={<SpecificStockAnalysis />}></Route>
+        <Route exact path="/profile" element={<Profile />}></Route>
+        <Route exact path="/analysis" element={<Analysis />}></Route>
+        <Route exact path="/news" element={< ArticleList/>}></Route>
       
 
       </Routes>
