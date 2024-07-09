@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getStockData } from "../../Api/auth";
 import Card from "./Card.jsx";
 import Navbar from "../../Utilis/Navbar/Navbar";
+import Footer from "../../Utilis/Footer/Footer.jsx";
 
 
 export default function Sell() {
@@ -45,6 +46,9 @@ export default function Sell() {
           ))}
         </tbody>
         </table>
+        <div className="w-screen  items-end justify-end min-h-screen">
+        </div>
+            <Footer/>
          </>
   );
 }

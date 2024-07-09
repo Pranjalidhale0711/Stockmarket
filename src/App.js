@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import "./App.css";
-import SignIn from "./Components/SignIn";
-import SignUp from "./Components/SignUp";
+import SignIn from "./Components/Auth/SignIn";
+import SignUp from "./Components/Auth/SignUp";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { useEffect, useState } from "react";
@@ -9,10 +9,11 @@ import { getUser } from "./Api/auth";
 import { useNavigate } from "react-router-dom";
 import Buy from './Components/Buy/Buy';
 import Sell from './Components/Sell/Sell'
+import ContactPage from "./Components/Contact/ContactPage";
 
 import Profile from "./Components/Dashboard/Profile";
 import Analysis from "./Components/Analysis/Analysis";
-import ArticleList from "./Components/News";
+import ArticleList from "./Components/News/NewsPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.js";
 import HomePage from "./Components/HomePage/index";
@@ -63,10 +64,11 @@ const AppRoutes = () => {
         <Route exact path="/home" element={<HomePage />}></Route>
         <Route exact path="/buy" element={<Buy />}></Route>
         <Route exact path="/sell" element={<Sell />}></Route>
-     <Route exact path="/specificStockAnalysis/:stockName" element={<SpecificStockAnalysis />}></Route>
+        <Route exact path="/specificStockAnalysis/:stockName" element={<SpecificStockAnalysis />}></Route>
         <Route exact path="/profile" element={<Profile />}></Route>
         <Route exact path="/analysis" element={<Analysis />}></Route>
         <Route exact path="/news" element={< ArticleList/>}></Route>
+        <Route exact path="/contactUs" element={<ContactPage/>}></Route>
       
 
       </Routes>

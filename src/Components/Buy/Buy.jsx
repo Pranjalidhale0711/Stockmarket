@@ -9,6 +9,7 @@ import animation from "../../Assets/Buy.json"
 import Loader from "../../Utilis/Loader/Loader";
 
 import Navbar from "../../Utilis/Navbar/Navbar";
+import Footer from "../../Utilis/Footer/Footer";
 
 function Buy() {
   const [stockName, setStockName] = useState("");
@@ -85,7 +86,7 @@ function Buy() {
     <>
       <Navbar />
 
-      <div style={{ width: "100vw", display: "flex", justifyContent: "flex-end" }}>
+      <div style={{ width: "100vw", display: "flex", justifyContent: "flex-end" }} >
 
       </div>
       <section style={{ minHeight: "100vh", width: "100vw" }} className="row">
@@ -170,6 +171,7 @@ function Buy() {
           {gettingDetails && <div ><Loader /></div>}
         </div>}
       </section>
+      <Footer/>
     </>
   );
 

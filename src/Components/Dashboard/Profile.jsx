@@ -4,6 +4,7 @@ import Navbar from "../../Utilis/Navbar/Navbar";
 import { CgProfile } from "react-icons/cg";
 import { MdAttachMoney } from "react-icons/md";
 import { GiReceiveMoney } from "react-icons/gi";
+import Footer from "../../Utilis/Footer/Footer";
 
 export default function Profile() {
 const [userName, setUserName] = useState("");
@@ -83,7 +84,7 @@ const [userName, setUserName] = useState("");
           className="row text-[#111a6f] font-extrabold text-5xl  flex items-center justify-center"
           style={{ height: "10vh", marginLeft: "0px" }}
         >
-          Your Profile
+         Hello {userName}!
         </div>
         <div className="row" style={{ minHeight: "20vh", marginLeft: "0px" }}>
           <div
@@ -239,6 +240,10 @@ const [userName, setUserName] = useState("");
           </div>
         </div>
       </section>
+      <div className="mt-5">
+
+      <Footer/>
+      </div>
     </>
   );
 }

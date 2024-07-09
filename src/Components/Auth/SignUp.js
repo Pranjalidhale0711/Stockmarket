@@ -2,9 +2,9 @@ import React from 'react'
 import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import { Link, useNavigate } from "react-router-dom";
-import { handleSubmitSignUp } from '../Api/auth';
-import Lottie from "lottie-react"
-import Signin from "../Assets/Signin.json"
+import { handleSubmitSignUp } from '../../Api/auth';
+import Lottie from "lottie-react";
+import Signin from "../../Assets/Signin.json"
 
 
 

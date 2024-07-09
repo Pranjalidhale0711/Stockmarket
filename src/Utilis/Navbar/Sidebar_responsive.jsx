@@ -45,7 +45,7 @@ function Sidebar_responsive() {
             <FaBars onClick={showSidebar} style={{ fontSize: '3.5vh', marginBottom:"6px", color:"black" }} />
           </Link>
           <h5 className="text-3xl font-bold" style={{ marginLeft: "10px" }}>
-            PaperMarket
+           TradeWise
           </h5>
         </div>
         <div

@@ -55,13 +55,13 @@ export const getUser = async () => {
 export const getStock = async (stockName) => {
   const stock_name = stockName;
   const dateObj = new Date();
-  dateObj.setDate(dateObj.getDate() - 1);
+  dateObj.setDate(dateObj.getDate() - 2);
   const year = dateObj.getFullYear();
   const month = (dateObj.getMonth() + 1).toString().padStart(2, "0");
   const day = dateObj.getDate().toString().padStart(2, "0");
 const formattedDate = `${year}-${month}-${day}`;
   const dateObj2 = new Date();
-  dateObj2.setDate(dateObj2.getDate() - 2);
+  dateObj2.setDate(dateObj2.getDate() - 3);
   const year2 = dateObj2.getFullYear();
   const month2 = (dateObj2.getMonth() + 1).toString().padStart(2, "0"); // Months are zero-based
   const day2 = dateObj2.getDate().toString().padStart(2, "0");

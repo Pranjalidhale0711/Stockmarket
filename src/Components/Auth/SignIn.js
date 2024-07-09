@@ -2,9 +2,9 @@ import React from "react";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
-import { handleSubmitSignIn } from "../Api/auth";
+import { handleSubmitSignIn } from "../../Api/auth";
 import Lottie from "lottie-react"
-import Signin from "../Assets/Signin.json"
+import Signin from "../../Assets/Signin.json"
 function SignUp() {
   const [userName, setUsername] = useState({});
   const [password, setPassword] = useState({});

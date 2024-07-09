@@ -3,6 +3,7 @@ import { getMonthlyData, getStock, getStockAnalysis } from "../../Api/auth";
 import { Linechart } from "../../Utilis/Charts/LineChart";
 import Loader from "../../Utilis/Loader/Loader";
 import Navbar from "../../Utilis/Navbar/Navbar";
+import Footer from "../../Utilis/Footer/Footer";
 // Import the Loader component
 
 function Analysis() {
@@ -164,6 +165,9 @@ function Analysis() {
           </div>
         )}
       </div>
+      <div className="w-screen  items-end justify-end h-screen">
+      </div>
+      <Footer/>
     </>
   );
 }

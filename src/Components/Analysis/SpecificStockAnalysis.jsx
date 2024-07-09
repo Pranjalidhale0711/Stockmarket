@@ -5,6 +5,7 @@ import { Linechart } from "../../Utilis/Charts/LineChart";
 
 import Loader from "../../Utilis/Loader/Loader";
 import Navbar from "../../Utilis/Navbar/Navbar";
+import Footer from "../../Utilis/Footer/Footer";
 
 function SpecificStockAnalysis() {
     const { stockName } = useParams();
@@ -148,9 +149,16 @@ function SpecificStockAnalysis() {
                     <Linechart data={charts[charts.length - 1].data} options={charts[charts.length - 1].options} />
                   </div>
                 )}
+           
               </div>
             )}
+
+         
           </div>
+          
+          <div className="w-screen  items-end justify-end h-screen">
+      </div>
+      <Footer/>
         </>
       );
 }

@@ -5,6 +5,7 @@ import {  toast } from "react-toastify";
 import {  getStock, handleSell } from "../../Api/auth";
 
 import "./Card.css"
+import Footer from "../../Utilis/Footer/Footer";
 function Card({ stockName, stockQuantity }) {
   const navigate = useNavigate();
   const [sellQuantity, setSellQuantity] = useState(0);
@@ -105,7 +106,7 @@ function Card({ stockName, stockQuantity }) {
         </td>
        
         </tr>
-     
+    
         </>
   
       

@@ -3,6 +3,7 @@ import "./Home.css";
 import StockImg from "../../Assets/stock.svg";
 
 import Navbar from "../../Utilis/Navbar/Navbar";
+import Footer from "../../Utilis/Footer/Footer";
 
 const Home = () => {
 
@@ -26,6 +27,7 @@ const Home = () => {
           <img src={StockImg} className="stockImg" alt="Stock" />
         </div>
       </section>
+     
     </>
   );
 };

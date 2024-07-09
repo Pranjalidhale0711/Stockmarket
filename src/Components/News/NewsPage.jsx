@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import NewsList from './NewsList';
 import Pagination from './Pagination';
-import Loader from '../Utilis/Loader/Loader';
-import Navbar from '../Utilis/Navbar/Navbar';
+import Loader from '../../Utilis/Loader/Loader';
+import Navbar from '../../Utilis/Navbar/Navbar';
+import Footer from '../../Utilis/Footer/Footer';
 
 const ArticleList = () => {
   const [articles, setArticles] = useState([]);
@@ -11,7 +12,7 @@ const ArticleList = () => {
   const postPerPage=9;
 
   useEffect(() => {
-    axios.get('https://newsapi.org/v2/everything?q=finance&from=2024-06-13&sortBy=publishedAt&apiKey=e255d757ed5a44e7a64b2e646abe5fca')
+    axios.get('https://newsapi.org/v2/everything?q=stock&from=2024-06-13&sortBy=publishedAt&apiKey=e255d757ed5a44e7a64b2e646abe5fca')
       .then(response => {
         setArticles(response.data.articles);
       })
@@ -38,6 +39,7 @@ const ArticleList = () => {
             />
       </div>
     </div>
+    <Footer/>
     </>
   );
 };

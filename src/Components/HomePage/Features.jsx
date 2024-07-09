@@ -1,6 +1,7 @@
 import React from 'react';
 import Feature from './Feature';
 import "./Feature.css"
+import Footer from '../../Utilis/Footer/Footer';
 
 const featuresData = [
   {
@@ -15,6 +16,7 @@ const featuresData = [
 ];
 
 const Features = () => (
+  
 //   <div className="d-flex justify-content-space-around" style={{width: '100vw'}} id="features">
 //     <div className="col-md-6" id='subHeading'>
 //       <h3 style={{ backgroundImage: 'linear-gradient(to right, #B030B0, #602080, #202060)', WebkitBackgroundClip: 'text', backgroundClip: 'text', color: 'transparent', fontWeight: "bold", fontSize : '30px', paddingLeft : '2vw' }}>The future is now and you just need to realize it. Step into future today and make it happen.</h3>
@@ -25,6 +27,7 @@ const Features = () => (
 //       ))}
 //     </div> */}
 //   </div>
+<>
   <div className="container-fluid" style={{ width: '100vw' }} id="features">
   <div className="row d-flex justify-content-center">
     <div className="col-12 col-md-10" id='subHeading'>
@@ -44,6 +47,8 @@ const Features = () => (
     </div>
   </div>
 </div>
+<Footer/>
+</>
 
 );
 
