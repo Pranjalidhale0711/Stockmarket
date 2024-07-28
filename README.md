@@ -27,4 +27,4 @@ TradeWise is a simulated stock market platform that allows users to practice buy
 ![Screenshot](ss/ss4.png)
 ![Screenshot](ss/ss5.png)
 ![Screenshot](ss/ss6.png)
-![Screenshot](ss/ss7.png)
+

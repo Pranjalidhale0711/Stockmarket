@@ -12,7 +12,7 @@ const ArticleList = () => {
   const postPerPage=9;
 
   useEffect(() => {
-    axios.get('https://newsapi.org/v2/everything?q=stock&from=2024-06-13&sortBy=publishedAt&apiKey=e255d757ed5a44e7a64b2e646abe5fca')
+    axios.get('https://newsapi.org/v2/everything?q=stock&from=2024-06-25&sortBy=publishedAt&apiKey=e255d757ed5a44e7a64b2e646abe5fca')
       .then(response => {
         setArticles(response.data.articles);
       })
