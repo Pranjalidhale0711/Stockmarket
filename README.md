@@ -1,70 +1,28 @@
-# Getting Started with Create React App
+# TradeWise
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+TradeWise is a simulated stock market platform that allows users to practice buying and selling stocks using virtual funds.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **Simulated Stock Trading**: Users can simulate buying and selling stocks with virtual credits.
+- **Real-time Stock Data**: Access to real-time stock market data for making informed trading decisions.
+- **Price Updates**: Receive timely updates on stock prices to stay informed about market changes.
+- **Learning Platform**: Provides a risk-free environment for users to learn and practice stock trading strategies.
+- **Authentication with JWT**: Secure user authentication using JSON Web Tokens (JWT).
 
-### `npm start`
+## Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Node.js**: Backend JavaScript runtime environment.
+- **MongoDB**: NoSQL database used for storing user data and stock information.
+- **Express**: Web framework for Node.js used in building the RESTful API.
+- **ReactJS**: Frontend JavaScript library for building user interfaces.
+- **JWT**: JSON Web Tokens used for authentication and authorization.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Screenshots
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+<img width="1440" alt="ss1" src="https://github.com/user-attachments/assets/df0661eb-a24e-466b-8cff-b87ced9c0d83">
+<img width="1440" alt="ss2" src="https://github.com/user-attachments/assets/73ab8d51-2c37-48fa-b942-dda838417a99">
+<img width="1440" alt="ss3" src="https://github.com/user-attachments/assets/a58bd3a6-0a2e-413f-80f3-b25c4a54a73b">
+<img width="1440" alt="ss4" src="https://github.com/user-attachments/assets/109c4aec-0017-43a0-b784-7a76c86e7770">
+![Uploading ss5.png…]()
+<img width="1108" alt="ss6" src="https://github.com/user-attachments/assets/0cabab23-db1e-4fdc-8650-9db13ce18b81">
